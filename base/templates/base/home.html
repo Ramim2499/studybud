@@ -7,7 +7,10 @@
   <div>
     {% for room in rooms %}
       <div>
+        <span>@{{room.host.username}}</span><!-- by default djanglo deels with User related things by User model -->
         <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5><!--variables can be passeed in with tow curly bases (room.id) room object dictionary id value-->
+        <small>{{room.topic.name}}</small>
+        <hr>
       </div>
     {% endfor %}
   </div>
