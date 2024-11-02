@@ -16,8 +16,11 @@ class Room(models.Model):
   name = models.CharField(max_length=200)
   description = models.TextField(null=True, blank=True) #it can be blank by null=True, blank=True means the submitted form can also be true
   #particicipants =
-  update = models.DateTimeField(auto_now=True) #takes the time when every time the save method is called
+  updated = models.DateTimeField(auto_now=True) #takes the time when every time the save method is called
   created = models.DateTimeField(auto_now_add=True) #only take the time when we first save or create this instance(initial time)
+
+  class Meta:
+    ordering = ['-updated', '-created']
 
   def __str__(self):
     return self.name #it will return the name of the class in the admin panel
