@@ -15,7 +15,7 @@ class Room(models.Model):
   topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)#if the topic parent class is deleted the room child model is not deleted null = True allowed in the database
   name = models.CharField(max_length=200)
   description = models.TextField(null=True, blank=True) #it can be blank by null=True, blank=True means the submitted form can also be true
-  #particicipants =
+  participants = models.ManyToManyField(User, related_name='participants', blank=True)
   updated = models.DateTimeField(auto_now=True) #takes the time when every time the save method is called
   created = models.DateTimeField(auto_now_add=True) #only take the time when we first save or create this instance(initial time)
 
