@@ -5,7 +5,7 @@
       <a href="{% url 'update-room' room.id %}">Edit</a>
       <a href="{% url 'delete-room' room.id %}">Delete</a>
       {% endif %}
-      <span>@{{room.host.username}}</span><!-- by default djanglo deels with User related things by User model -->
+      <a href="{% url 'user-profile' room.host.id %}">@{{room.host.username}}</a><!-- by default djanglo deels with User related things by User model -->
       <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5><!--variables can be passeed in with tow curly bases (room.id) room object dictionary id value-->
       <small>{{room.topic.name}}</small>
       <hr>
