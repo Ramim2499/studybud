@@ -1,6 +1,5 @@
 from pydoc_data.topics import topics
 from wsgiref.util import request_uri
-
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -11,7 +10,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 
 def loginPage(request):
@@ -169,3 +168,17 @@ def deleteMessage(request, pk):
     message.delete()
     return redirect('home')
   return render(request, 'base/delete.html', {'obj':message})
+
+
+@login_required(login_url='login')
+def updateUser(request):
+  user = request.user
+  form = UserForm(instance=user)
+
+  if request.method == 'POST':
+    form = UserForm(request.POST, instance=user)
+    if form.is_valid():
+      form.save()
+      return redirect('user-profile',pk=user.id)
+
+  return render(request, 'base/update-user.html', {'form':form})
